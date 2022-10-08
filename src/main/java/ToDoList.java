@@ -82,9 +82,9 @@ public class ToDoList {
         System.out.println(); // Blank line for formatting.
     }
 
-    // TODO Finish JAVADOC comment.
     /**
-     *
+     * Queries the database and displays all tasks from the tasks table in order they were entered. Each task entry is
+     * preceded by an integer counting up from 1.
      */
     public void displayTasksDB() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
@@ -142,9 +142,9 @@ public class ToDoList {
         }
     }
 
-    // TODO Finish JAVADOC comment.
     /**
-     *
+     * Displays a list of tasks and their associated Task ID number, prompts the user for the Task ID number of the task
+     * to remove, and submits a query that deletes the record associated with the given Task ID number.
      */
     public void removeTaskDB() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("default");
@@ -159,7 +159,8 @@ public class ToDoList {
                 i++;
                 System.out.println("Task ID: " + task.getTaskId() + ": " + task.getTask());
             }
-            int taskIDToRemove = userInputInt("\nPlease enter the TaskID number of the task you wish to remove: ", allTasks.getFirstResult(), allTasks.getMaxResults());
+            int taskIDToRemove = userInputInt("\nPlease enter the TaskID number of the task you wish to" +
+                                                " remove: ", allTasks.getFirstResult(), allTasks.getMaxResults());
             Query removeTask = entityManager.createNativeQuery("DELETE FROM tasks WHERE task_id =:taskIDToRemove");
             removeTask.setParameter("taskIDToRemove",taskIDToRemove);
             removeTask.executeUpdate(); // This is needed to actually remove the task entry.
